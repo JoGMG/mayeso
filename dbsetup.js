@@ -1,32 +1,40 @@
-conn = new Mongo();
-db = conn.getDB("admin");
+const MongoClient = require('mongodb').MongoClient;
 
-const DB_NAME = 'mayesoDB';
-const USER_NAME = 'mayeso';
-const USER_PASSWORD = 'mayesoPWD';
+// Connection URL, DB, and User credentials
+const url = 'mongodb://127.0.0.1:27017';
+const dbName = 'mayeso_db';
 
-// check if the database exists
-const databases = db.adminCommand('listDatabases');
-let dbExists = false;
-for(let i = 0; i < databases.databases.length; i++) {
-    if(databases.databases[i].name === DB_NAME) {
-        dbExists = true;
-        break;
-    }
-}
+// Use connect method to connect to the server
+MongoClient.connect(url)
+  .then(client => {
+    console.log("Connected successfully to server\n");
 
-if(!dbExists) {
-    // if the database does not exist, create it
-    db = conn.getDB(DB_NAME);
+    const db = client.db(dbName);
 
-    // create a user for the database
-    db.createUser({
-        user: USER_NAME,
-        pwd: USER_PASSWORD,
-        roles: [{ role: 'dbOwner', db: DB_NAME }]
-    });
+    // Create collection and insert document
+    const questionAnswer = {
+      question: "What is the capital of France?",
+      answer: "Paris"
+    };
+    db.collection('questions').insertOne(questionAnswer)
+      .then(() => {
+        console.log('Document inserted into "questions" collection');
+      })
+      .catch(error => console.error('Failed to insert document', error));
 
-    print('Database created and user added.');
-} else {
-    print('Database already exists.');
-}
+    // Use the listCollections method and toArray to get an array of collections
+    db.listCollections().toArray()
+      .then(collections => {
+        console.log('Collections in mayeso_db database:');
+        collections.forEach((collection) => {
+          console.log(collection.name);
+        });
+
+        // Add a delay before closing the connection
+        setTimeout(() => {
+          client.close();
+        }, 1500);
+      })
+      .catch(err => console.error('Failed to retrieve collections', err));
+  })
+  .catch(err => console.error('Failed to connect to MongoDB', err));

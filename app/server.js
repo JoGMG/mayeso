@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const Question = require('../models/question');
 const Exam = require('../models/exam');
 
+// Create an Express application and auto-parse JSON
 const app = express();
 app.use(express.json());
 
@@ -40,7 +41,7 @@ app.get('/exams', (request, response) => {
 app.get('/questions/:id', (request, response) => {
   const db = getDB();
   const id = request.params.id;
-  db.collection('questions').find({_id: id}).toArray()
+  db.collection('questions').find({ _id: id }).toArray()
     .then(questions => {
       response.status(200).json(questions);
     })
@@ -54,7 +55,7 @@ app.get('/questions/:id', (request, response) => {
 app.get('/exams/:id', (request, response) => {
   const db = getDB();
   const id = request.params.id;
-  db.collection('exams').find({_id: id}).toArray()
+  db.collection('exams').find({ _id: id }).toArray()
     .then(questions => {
       response.status(200).json(questions);
     })
@@ -161,4 +162,5 @@ app.delete('/exams/:id', (request, response) => {
     });
 });
 
+// Start the server and listen on port 3000
 app.listen(3000, () => console.log('Server is running on port 3000'));

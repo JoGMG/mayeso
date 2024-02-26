@@ -1,19 +1,31 @@
 const MongoClient = require('mongodb').MongoClient;
 
+// MongoDB server URL and DB name
 const url = 'mongodb://127.0.0.1:27017';
 const dbName = 'mayeso_db';
-let db;
+let db; // Hold DB connection
 
-async function dbConnection() {
+/**
+ * Connect to the MongoDB server and set the `db` variable
+ * to the connected database.
+ * This function is asynchronous and returns a Promise.
+ */
+async function dbConnection () {
   try {
     const client = await MongoClient.connect(url);
     db = client.db(dbName);
-    console.log("Connected successfully to server");
+    console.log('Connected successfully to server');
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);
   }
 }
 
-const getDB = () => db;
+/**
+ * Get the current database connection.
+ * @returns {Object} The current database connection.
+ */
+function getDB() {
+  return db;
+}
 
 module.exports = { dbConnection, getDB };

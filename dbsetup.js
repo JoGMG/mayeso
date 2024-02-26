@@ -3,63 +3,57 @@ const { v4: uuidv4 } = require('uuid');
 const Question = require('./models/question');
 const Exam = require('./models/exam');
 
-// Connection URL, DB, and User credentials
+// Connection URL and DB name
 const url = 'mongodb://127.0.0.1:27017';
 const dbName = 'mayeso_db';
 
-// Question1 object creation
-const id = uuidv4();
-const author = "Regah John";
-const question = "What is the capital of France?";
-const options = ["Paris", "London", "Berlin", "Madrid"];
-const answer = "Paris";
-const questionObject = new Question(id, author, question, options, answer);
-
-// Question2 object creation
-const id2 = uuidv4();
-const author2 = "Edmund Nees";
-const question2 = "What is the capital of Australia?";
-const options2 = ["Sydney", "Melbourne", "Canberra", "Adelaide"];
-const answer2 = "Canberra";
-const questionObject2 = new Question(id2, author2, question2, options2, answer2);
-
-// Exam object creation
-const examID = uuidv4();
-const examAuthor = "Naomi Stone";
-const examTitle = "Country & Capitals";
-const examDuration = 60;
-const examQuestions = [questionObject, questionObject2];
-const pointsPerQuestion = 2;
-const examObject = new Exam(
-  examID,
-  examAuthor,
-  examTitle,
-  examDuration,
-  examQuestions,
-  pointsPerQuestion
+// Create two Question objects
+const questionObject = new Question(
+  uuidv4(),
+  'Regah John',
+  'What is the capital of France?',
+  ['Paris', 'London', 'Berlin', 'Madrid'],
+  'Paris'
+);
+const questionObject2 = new Question(
+  uuidv4(),
+  'Edmund Nees',
+  'What is the capital of Australia?',
+  ['Sydney', 'Melbourne', 'Canberra', 'Adelaide'],
+  'Canberra'
 );
 
-// Use connect method to connect to the server
+// Create Exam object
+const examObject = new Exam(
+  uuidv4(),
+  'Naomi Stone',
+  'Country & Capitals',
+  60,
+  [questionObject, questionObject2],
+  2
+);
+
+// Connect to the MongoDB server
 MongoClient.connect(url)
   .then(client => {
-    console.log("Connected successfully to server");
+    console.log('Connected successfully to server');
     const db = client.db(dbName);
 
-    // Create questions collection and insert document
+    // Insert the Question objects into the 'questions' collection
     db.collection('questions').insertMany([questionObject, questionObject2])
       .then(() => {
         console.log('Document inserted into "questions" collection');
       })
       .catch(error => console.error('Failed to insert document', error));
 
-    // Create exams collection and insert document
+    // Insert the Exam object into the 'exams' collection
     db.collection('exams').insertOne(examObject)
       .then(() => {
         console.log('Document inserted into "exams" collection');
       })
       .catch(error => console.error('Failed to insert document', error));
 
-    // Use the listCollections method and toArray to get an array of collections
+    // List all collections in the database
     db.listCollections().toArray()
       .then(collections => {
         console.log('Collections in mayeso_db database:');
@@ -67,7 +61,7 @@ MongoClient.connect(url)
           console.log(collection.name);
         });
 
-        // Add a delay before closing the connection
+        // Close the connection after a delay
         setTimeout(() => {
           client.close();
         }, 1500);

@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 
 // MongoDB server URL and DB name
-const url = 'mongodb://127.0.0.1:27017';
+const url = process.env.DATABASE_URL;
 const dbName = 'mayeso_db';
 let db; // Hold DB connection
 

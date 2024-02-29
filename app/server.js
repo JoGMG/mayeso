@@ -4,6 +4,9 @@ const { v4: uuidv4 } = require('uuid');
 const Question = require('../models/question');
 const Exam = require('../models/exam');
 
+// Use port number from the PORT environment variable or 3000 if not specified
+const port = process.env.PORT || 3000;
+
 // Create an Express application and auto-parse JSON
 const app = express();
 app.use(express.json());
@@ -163,4 +166,4 @@ app.delete('/exams/:id', (request, response) => {
 });
 
 // Start the server and listen on port 3000
-app.listen(3000, () => console.log('Server is running on port 3000'));
+app.listen(port, () => console.log('Server is running on port 3000'));

@@ -2,13 +2,13 @@
   "name": "mayeso",
   "version": "1.0.0",
   "description": "",
-  "main": "question.js",
+  "main": "app/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Joshua Attah",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",

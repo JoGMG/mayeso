@@ -4,7 +4,7 @@ const Question = require('./models/question');
 const Exam = require('./models/exam');
 
 // Connection URL and DB name
-const url = process.env.DATABASE_URL;
+const url = decodeURIComponent(process.env.DATABASE_URL);
 
 if (!url) {
   console.error('Error: The DATABASE_URL environment variable is not set.');

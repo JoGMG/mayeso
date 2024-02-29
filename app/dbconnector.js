@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 
 // MongoDB server URL and DB name
-const url = process.env.DATABASE_URL;
+const url = decodeURIComponent(process.env.DATABASE_URL);
 let db; // Hold DB connection
 
 if (!url) {

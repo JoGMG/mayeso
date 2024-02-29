@@ -2,8 +2,14 @@ const MongoClient = require('mongodb').MongoClient;
 
 // MongoDB server URL and DB name
 const url = process.env.DATABASE_URL;
-const dbName = 'mayeso_db';
 let db; // Hold DB connection
+
+if (!url) {
+  console.error('Error: The DATABASE_URL environment variable is not set.');
+  process.exit(1);
+} else {
+  console.log('Success: The DATABASE_URL environment variable is set.');
+}
 
 /**
  * Connect to the MongoDB server and set the `db` variable
@@ -13,7 +19,7 @@ let db; // Hold DB connection
 async function dbConnection () {
   try {
     const client = await MongoClient.connect(url);
-    db = client.db(dbName);
+    db = client.db();
     console.log('Connected successfully to server');
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);

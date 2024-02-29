@@ -5,7 +5,13 @@ const Exam = require('./models/exam');
 
 // Connection URL and DB name
 const url = process.env.DATABASE_URL;
-const dbName = 'mayeso_db';
+
+if (!url) {
+  console.error('Error: The DATABASE_URL environment variable is not set.');
+  process.exit(1);
+} else {
+  console.log('Success: The DATABASE_URL environment variable is set.');
+}
 
 // Create two Question objects
 const questionObject = new Question(
@@ -37,7 +43,7 @@ const examObject = new Exam(
 MongoClient.connect(url)
   .then(client => {
     console.log('Connected successfully to server');
-    const db = client.db(dbName);
+    const db = client.db();
 
     // Insert the Question objects into the 'questions' collection
     db.collection('questions').insertMany([questionObject, questionObject2])

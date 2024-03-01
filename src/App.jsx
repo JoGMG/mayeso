@@ -3,6 +3,7 @@ import { Layout } from "./components";
 import {
   About,
   CreateQuiz,
+  FAQ,
   Home,
   NotFound,
   Quiz,
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/scores",
         element: <Scores />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
       },
       {
         path: "/quiz/create",

@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+    @apply border border-accent p-3 text-sm rounded-md hover:bg-accent hover:text-primary duration-200
+}

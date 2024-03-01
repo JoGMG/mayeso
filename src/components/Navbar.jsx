@@ -49,14 +49,14 @@ function Navbar() {
         </NavLink>
 
         <NavLink
-          to="#footer"
+          to="/faq"
           className={({ isActive }) =>
             isActive
               ? "uppercase cursor-pointer text-green-500"
               : "uppercase cursor-pointer"
           }
         >
-          Contact
+          faq
         </NavLink>
       </div>
 
@@ -78,8 +78,8 @@ function Navbar() {
       <div
         className={
           showNav
-            ? "absolute top-0 left-0 lg:hidden w-[50%] h-screen  flex flex-col px-4 bg-black/50 py-7  gap-6 duration-200  shadow-sm"
-            : "absolute top-0 left-[-100%] lg:hidden w-[50%] h-screen  flex flex-col px-4 bg-black/50 py-1  gap-6 duration-200  shadow-sm"
+            ? "fixed top-0 left-0 lg:hidden w-[50%] h-full  flex flex-col px-4 bg-black/50 py-7  gap-6 duration-200  shadow-sm"
+            : "fixed top-0 left-[-100%] lg:hidden w-[50%] h-full  flex flex-col px-4 bg-black/50 py-1  gap-6 duration-200  shadow-sm"
         }
       >
         <div>
@@ -127,14 +127,14 @@ function Navbar() {
           </NavLink>
 
           <NavLink
-            to="#footer"
+            to="/faq"
             className={({ isActive }) =>
               isActive
                 ? "uppercase cursor-pointer border-b pb-3  text-center border-secondary/40 text-green-500"
                 : "uppercase cursor-pointer border-b pb-3  text-center border-secondary/40"
             }
           >
-            Contact
+            faq
           </NavLink>
         </div>
         <div className="cursor-pointer mt-4 mx-auto">

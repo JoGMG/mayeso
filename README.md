@@ -1,6 +1,6 @@
 <img src="assets/mayeso.jpeg" alt="Mayeso Logo" width="200" align="right"/>
 
-# Mayeso (Client-Side)
+# Mayeso (Server-Side)
 
 Mayeso is your ultimate learning companion, designed to enhance your learning experience and make studying enjoyable. With Mayeso, you can create, discover, and master quizzes on a wide range of topics, all tailored to your learning goals.
 

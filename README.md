@@ -1,6 +1,6 @@
 # Mayeso (Client-Side)
 
-![Mayeso Logo](assets/mayeso.jpeg)
+<img src="assets/mayeso.jpeg" alt="Mayeso Logo" width="200"/>
 
 Mayeso is your ultimate learning companion, designed to enhance your learning experience and make studying enjoyable. With Mayeso, you can create, discover, and master quizzes on a wide range of topics, all tailored to your learning goals.
 
@@ -22,7 +22,7 @@ To get started with Mayeso (client-side), follow these steps:
 
 ## Technologies Used
 
-Mayeso is built using the following technologies:
+Mayeso (client-side) is built using the following technologies:
 
 - React.js
 - Node.js

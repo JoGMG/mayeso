@@ -1,4 +1,4 @@
-# Mayeso
+# Mayeso (Client-Side)
 
 ![Mayeso Logo](assets/mayeso.jpeg)
 

@@ -34,7 +34,7 @@ function Navbar() {
               : "uppercase cursor-pointer"
           }
         >
-          Quizes
+          My Quizes
         </NavLink>
 
         <NavLink
@@ -62,7 +62,7 @@ function Navbar() {
 
       <div className="cursor-pointer">
         <Link to={"/quiz/create"} className="hidden lg:block btn">
-          Make a quiz
+          Create New Quiz
         </Link>
         <div
           className="lg:hidden text-accent fixed right-4"
@@ -112,7 +112,7 @@ function Navbar() {
                 : "uppercase cursor-pointer border-b pb-3  text-center border-secondary/40"
             }
           >
-            Quizes
+            My Quizes
           </NavLink>
 
           <NavLink
@@ -139,7 +139,7 @@ function Navbar() {
         </div>
         <div className="cursor-pointer mt-4 mx-auto">
           <Link to={"/quiz/create"} className="btn ">
-            Make a quiz
+            Create New Quiz
           </Link>
         </div>
       </div>

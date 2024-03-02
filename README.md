@@ -1,5 +1,4 @@
 # Mayeso
-# Mayeso
 
 ![Mayeso Logo](assets/mayeso.jpeg)
 

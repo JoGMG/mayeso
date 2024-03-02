@@ -1,4 +1,4 @@
-<img src="assets/mayeso.jpeg" alt="Mayeso Logo" width="200" align="right"/>
+<img src="assets/mayeso.jpeg" alt="Mayeso Logo" width="100" align="right"/>
 
 # Mayeso (Client-Side)
 

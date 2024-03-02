@@ -17,6 +17,7 @@ function Hero({ img, headText, subText }) {
               "Mathematics",
               "History",
               "Entertainment",
+              "Science",
             ]}
             loop
           />

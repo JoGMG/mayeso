@@ -1,6 +1,7 @@
 const express = require('express');
-const { dbConnection, getDB } = require('./dbconnector');
 const { v4: uuidv4 } = require('uuid');
+const cors = require('cors');
+const { dbConnection, getDB } = require('./dbconnector');
 const Question = require('../models/question');
 const Exam = require('../models/exam');
 
@@ -10,6 +11,7 @@ const port = process.env.PORT || 3000;
 // Create an Express application and auto-parse JSON
 const app = express();
 app.use(express.json());
+app.use(cors()); // Allow all origins
 
 // Connecct to the database
 dbConnection();

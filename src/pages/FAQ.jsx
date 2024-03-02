@@ -20,7 +20,7 @@ function FAQ() {
           {faqData.FAQ.map((faqItem, index) => (
             <div
               key={index}
-              className=" py-6 bg-white/20 px-10 rounded shadow-md"
+              className=" py-6 bg-gray-500/20 px-10 rounded shadow-md"
             >
               <h3 className="text-xl font-semibold mb-2 text-accent">
                 {faqItem.question}

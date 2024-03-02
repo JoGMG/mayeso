@@ -14,18 +14,18 @@ app.use(express.json());
 // Connecct to the database
 dbConnection();
 
-// GET route to retrieve all questions
-app.get('/questions', (request, response) => {
-  const db = getDB();
-  db.collection('questions').find().toArray()
-    .then(questions => {
-      response.status(200).json(questions);
-    })
-    .catch(error => {
-      console.error('Failed to retrieve documents', error);
-      response.status(500).send('Failed to retrieve documents');
-    });
-});
+// // GET route to retrieve all questions
+// app.get('/questions', (request, response) => {
+//   const db = getDB();
+//   db.collection('questions').find().toArray()
+//     .then(questions => {
+//       response.status(200).json(questions);
+//     })
+//     .catch(error => {
+//       console.error('Failed to retrieve documents', error);
+//       response.status(500).send('Failed to retrieve documents');
+//     });
+// });
 
 // GET route to retrieve all exams
 app.get('/exams', (request, response) => {
@@ -40,19 +40,19 @@ app.get('/exams', (request, response) => {
     });
 });
 
-// GET route to retrieve a single question
-app.get('/questions/:id', (request, response) => {
-  const db = getDB();
-  const id = request.params.id;
-  db.collection('questions').find({ _id: id }).toArray()
-    .then(questions => {
-      response.status(200).json(questions);
-    })
-    .catch(error => {
-      console.error('Failed to retrieve document', error);
-      response.status(500).send('Failed to retrieve document');
-    });
-});
+// // GET route to retrieve a single question
+// app.get('/questions/:id', (request, response) => {
+//   const db = getDB();
+//   const id = request.params.id;
+//   db.collection('questions').find({ _id: id }).toArray()
+//     .then(questions => {
+//       response.status(200).json(questions);
+//     })
+//     .catch(error => {
+//       console.error('Failed to retrieve document', error);
+//       response.status(500).send('Failed to retrieve document');
+//     });
+// });
 
 // GET route to retrieve a single exam
 app.get('/exams/:id', (request, response) => {
@@ -68,36 +68,37 @@ app.get('/exams/:id', (request, response) => {
     });
 });
 
-// POST route to add a question
-app.post('/questions', (request, response) => {
-  const db = getDB();
-  const question = new Question(
-    uuidv4(),
-    request.body.author,
-    request.body.question,
-    request.body.options,
-    request.body.answer
-  );
-  db.collection('questions').insertOne(question)
-    .then(() => {
-      response.status(201).send('Document inserted into "questions" collection');
-    })
-    .catch(error => {
-      console.error('Failed to insert document', error);
-      response.status(500).send('Failed to insert document');
-    });
-});
+// // POST route to add a question
+// app.post('/questions', (request, response) => {
+//   const db = getDB();
+//   const question = new Question(
+//     uuidv4(),
+//     request.body.author,
+//     request.body.question,
+//     request.body.options,
+//     request.body.answer
+//   );
+//   db.collection('questions').insertOne(question)
+//     .then(() => {
+//       response.status(201).send('Document inserted into "questions" collection');
+//     })
+//     .catch(error => {
+//       console.error('Failed to insert document', error);
+//       response.status(500).send('Failed to insert document');
+//     });
+// });
 
 // POST route to add an exam
 app.post('/exams', (request, response) => {
   const db = getDB();
   const exam = new Exam(
-    uuidv4(),
+    request.body.id ? request.body.id : uuidv4(),
     request.body.author,
     request.body.title,
+    request.body.subject,
     request.body.duration,
     request.body.questions,
-    request.body.pointsPerQuestion
+    request.body.total
   );
   db.collection('exams').insertOne(exam)
     .then(() => {
@@ -109,19 +110,19 @@ app.post('/exams', (request, response) => {
     });
 });
 
-// PUT route to update a question
-app.put('/questions/:id', (request, response) => {
-  const db = getDB();
-  const id = request.params.id;
-  db.collection('questions').updateOne({ _id: id }, { $set: request.body })
-    .then(() => {
-      response.status(200).send('Document updated in "questions" collection');
-    })
-    .catch(error => {
-      console.error('Failed to update document', error);
-      response.status(500).send('Failed to update document');
-    });
-});
+// // PUT route to update a question
+// app.put('/questions/:id', (request, response) => {
+//   const db = getDB();
+//   const id = request.params.id;
+//   db.collection('questions').updateOne({ _id: id }, { $set: request.body })
+//     .then(() => {
+//       response.status(200).send('Document updated in "questions" collection');
+//     })
+//     .catch(error => {
+//       console.error('Failed to update document', error);
+//       response.status(500).send('Failed to update document');
+//     });
+// });
 
 // PUT route to update an exam
 app.put('/exams/:id', (request, response) => {
@@ -137,19 +138,19 @@ app.put('/exams/:id', (request, response) => {
     });
 });
 
-// DELETE route to delete a question
-app.delete('/questions/:id', (request, response) => {
-  const db = getDB();
-  const id = request.params.id;
-  db.collection('questions').deleteOne({ _id: id })
-    .then(() => {
-      response.status(200).send('Document deleted in "questions" collection');
-    })
-    .catch(error => {
-      console.error('Failed to delete document', error);
-      response.status(500).send('Failed to delete document');
-    });
-});
+// // DELETE route to delete a question
+// app.delete('/questions/:id', (request, response) => {
+//   const db = getDB();
+//   const id = request.params.id;
+//   db.collection('questions').deleteOne({ _id: id })
+//     .then(() => {
+//       response.status(200).send('Document deleted in "questions" collection');
+//     })
+//     .catch(error => {
+//       console.error('Failed to delete document', error);
+//       response.status(500).send('Failed to delete document');
+//     });
+// });
 
 // DELETE route to delete an exam
 app.delete('/exams/:id', (request, response) => {

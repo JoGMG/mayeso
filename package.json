@@ -5,8 +5,7 @@
   "main": "app/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app/server.js",
-    "setup_db": "node dbsetup.js"
+    "start": "node app/server.js"
   },
   "keywords": [],
   "author": "Joshua Attah",

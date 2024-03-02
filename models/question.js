@@ -9,13 +9,15 @@ class Question {
    * @param {string} question - The question text.
    * @param {Array<string>} options - The possible answers to the question.
    * @param {string} answer - The correct answer to the question.
+   * @param {number} points - The number of points of the question.
    */
-  constructor (_id, author, question, options, answer) {
+  constructor (_id, author, question, options, answer, points) {
     this._id = _id;
     this.author = author;
     this.question = question;
     this.options = options;
     this.answer = answer;
+    this.points = points;
   }
 }
 

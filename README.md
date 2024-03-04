@@ -16,10 +16,9 @@ Mayeso is your ultimate learning companion, designed to enhance your learning ex
 To get started with Mayeso, follow these steps:
 
 1. Clone this repository to your local machine.
-2. Install client/server branch dependencies (individually) using `npm install`.
-3. Start the client-side/server-side development server (individually) using `npm start`.
+2. Install client branch dependencies using `npm install`.
+3. Start the client-side development server using `npm start`.
 4. Open your browser and navigate to `http://localhost:5000` to access Mayeso (client-side).
-5. Access mayeso (server-side) by making http requests to `http://localhost:3000/<route>`.
 
 ## Technologies Used
 

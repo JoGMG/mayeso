@@ -1,7 +1,7 @@
 const { dbConnection, getDB } = require('./dbconnector');
 const bcrypt = require('bcrypt');
 
-// user registration
+// user registration.
 async function registerUser(email, password) {
     const db = getDB();
     const usersCollection = db.collection('users');

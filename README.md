@@ -1,5 +1,3 @@
-<img src="assets/mayeso.jpeg" alt="Mayeso Logo" width="200" align="right"/>
-
 # Mayeso (Server-Side)
 
 Mayeso is your ultimate learning companion, designed to enhance your learning experience and make studying enjoyable. With Mayeso, you can create, discover, and master quizzes on a wide range of topics, all tailored to your learning goals.
@@ -18,7 +16,7 @@ To get started with Mayeso (server-side), follow these steps:
 1. Clone this repository to your local machine.
 2. Install dependencies using `npm install`.
 3. Start the development server using `npm start`.
-4. Access mayeso (server-side) by making http requests to `http://localhost:3000/<route>`.
+4. Access mayeso (server-side) by making http requests to `http://localhost:3000/api/<route>`.
 
 ## Technologies Used
 
@@ -38,7 +36,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact Us
 
-Have questions or feedback? Contact us at [contact@mayeso.com](mailto:contact@mayeso.com).
+Have questions or feedback? Contact us at [joattah3@gmail.com](mailto:joattah3@gmail.com).
 
 ## Acknowledgements
 

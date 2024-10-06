@@ -36,7 +36,7 @@ function Footer() {
               <FaDribbbleSquare size={30} />
             </div>
           </div>
-          <div className="flex gap-6 col-span-3 lg:col-span-2 justify-center gap-8">
+          <div className="flex col-span-3 lg:col-span-2 justify-center gap-8">
             <div className="">
               <h2 className="text-gray-800 font-semibold uppercase mb-3">
                 documentation

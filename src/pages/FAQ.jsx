@@ -1,5 +1,5 @@
 import React from "react";
-import faqData from "../assets/faq,js";
+import faqData from "../assets/faq.js";
 import { Hero } from "../components";
 
 function FAQ() {

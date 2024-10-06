@@ -1,19 +1,21 @@
 {
   "name": "mayeso",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "app/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app/server.js"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "Joshua Attah",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
     "mongodb": "^6.3.0",
-    "uuid": "^9.0.1"
+    "mongoose": "^8.7.0"
   }
 }

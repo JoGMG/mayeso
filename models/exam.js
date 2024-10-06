@@ -1,26 +1,43 @@
-/**
- * Class representing an Exam.
- */
-class Exam {
-  /**
-   * Create an exam.
-   * @param {string} _id - The unique identifier for the exam.
-   * @param {string} author - The author of the exam.
-   * @param {string} title - The title of the exam.
-   * @param {string} subject - The subject of the exam.
-   * @param {number} duration - The duration of the exam in minutes.
-   * @param {Array<Question>} questions - The questions in the exam.
-   * @param {number} total - The total points of the exam.
-   */
-  constructor (_id, author, title, subject, duration, questions, total) {
-    this._id = _id;
-    this.author = author;
-    this.title = title;
-    this.subject = subject;
-    this.duration = duration;
-    this.questions = questions;
-    this.total = total;
-  }
-}
+import { model, Schema, Types } from "mongoose";
 
-module.exports = Exam;
+const ExamSchema = new Schema({
+  author: {
+    type: String,
+    default: "Anonymous",
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  subject: {
+    type: String,
+    required: true,
+  },
+  duration: {
+    type: Number,
+    default: 10,
+  },
+  questions: {
+    type: [Types.ObjectId],
+    ref: "Question",
+    required: true,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  updated_at: {
+    type: Date,
+    default: Date.now(),
+  },
+});
+
+ExamSchema.pre("save", function (next) {
+  if (this.isModified()) {
+    this.updated_at = Date.now();
+  }
+
+  return next();
+});
+
+export const examModel = new model("Exam", ExamSchema);

@@ -15,7 +15,8 @@ class ExamController {
       const exams = await examModel.find().populate("questions").skip(skip).limit(limit);
       if (!exams?.length) msg = "No exam exists";
 
-      return res.status(200).json(new CustomResponse(msg, false, exams, page, limit));
+      const total = await examModel.find().countDocuments();
+      return res.status(200).json(new CustomResponse(msg, false, exams, page, limit, total));
     } catch (error) {
       const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));

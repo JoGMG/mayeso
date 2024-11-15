@@ -14,7 +14,8 @@ class QuestionController {
       const questions = await questionModel.find().skip(skip).limit(limit);
       if (!questions?.length) msg = "No question exists";
 
-      return res.status(200).json(new CustomResponse(msg, false, questions, page, limit));
+      const total = await examModel.find().countDocuments();
+      return res.status(200).json(new CustomResponse(msg, false, questions, page, limit, total));
     } catch (error) {
       const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));

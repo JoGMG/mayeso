@@ -24,6 +24,10 @@ app.use(express.json());
 app.use(cors());
 app.use("/", allRouter);
 
+app.get("/", (req, res) => {
+  return res.status(200).json("Hello World");
+});
+
 app.listen(PORT, () => {
   console.log(`App started, listening on port ${PORT}`);
 });

@@ -3,19 +3,21 @@ import { questionModel } from "../../models/question.js";
 import { CustomResponse } from "../utility.js";
 
 class ExamController {
+
   static async getAll(req, res) {
+    const page = Number(req.query.page) || undefined;
+    const limit = Number(req.query.limit) || undefined;
+    const skip = (page - 1) * limit || undefined;
+
     try {
       let msg = "Exams found";
 
-      const exams = await examModel.find().populate("questions");
-      if (!exams.length) msg = "No exam exists";
+      const exams = await examModel.find().populate("questions").skip(skip).limit(limit);
+      if (!exams?.length) msg = "No exam exists";
 
-      return res.status(200).json(new CustomResponse(msg, false, exams));
+      return res.status(200).json(new CustomResponse(msg, false, exams, page, limit));
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }
@@ -31,10 +33,7 @@ class ExamController {
 
       return res.status(200).json(new CustomResponse(msg, false, exam));
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }
@@ -44,25 +43,19 @@ class ExamController {
     const { questions } = body;
 
     try {
-      const questionIds = await Promise.all(
+      body.questions = await Promise.all(
         questions.map(async (element) => {
           const newQuestions = await questionModel.create(element);
           return newQuestions._id;
-        })
+        }),
       );
 
-      body.questions = questionIds;
-
       const newExam = await examModel.create(body);
-
       return res
         .status(201)
         .json(new CustomResponse("Exam created successfully", false, newExam));
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }
@@ -74,25 +67,13 @@ class ExamController {
     try {
       let msg = "Exam not found";
 
-      const exam = await examModel.findById(id);
-      if (!exam) return res.status(404).json(new CustomResponse(msg, true));
-
-      // body.updated_at = Date.now();
-      // const updatedExam = await examModel.findByIdAndUpdate(id, body, {
-      //   new: true,
-      // });
-
-      Object.assign(exam, body)
-      const updatedExam = await exam.save()
+      const updatedExam = await examModel.findByIdAndUpdate(id, body);
+      if (!updatedExam) return res.status(404).json(new CustomResponse(msg, true));
 
       msg = "Exam updated successfully";
-
       return res.status(200).json(new CustomResponse(msg, false, updatedExam));
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }
@@ -103,18 +84,13 @@ class ExamController {
     try {
       let msg = "Exam not found";
 
-      const exam = await examModel.findById(id);
+      const exam = await examModel.findByIdAndDelete(id);
       if (!exam) return res.status(404).json(new CustomResponse(msg, true));
 
-      await examModel.findByIdAndDelete(id);
       msg = "Exam deleted successfully";
-
       return res.status(200).json(new CustomResponse(msg, false));
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }

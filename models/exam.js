@@ -22,22 +22,6 @@ const ExamSchema = new Schema({
     ref: "Question",
     required: true,
   },
-  created_at: {
-    type: Date,
-    default: Date.now(),
-  },
-  updated_at: {
-    type: Date,
-    default: Date.now(),
-  },
-});
-
-ExamSchema.pre("save", function (next) {
-  if (this.isModified()) {
-    this.updated_at = Date.now();
-  }
-
-  return next();
-});
+}, { timestamps: true });
 
 export const examModel = new model("Exam", ExamSchema);

@@ -17,22 +17,6 @@ export const QuestionSchema = new Schema({
     type: String,
     default: 2,
   },
-  created_at: {
-    type: Date,
-    default: Date.now,
-  },
-  updated_at: {
-    type: Date,
-    default: Date.now,
-  },
-});
-
-QuestionSchema.pre("save", function (next) {
-  if (this.isModified()) {
-    this.updated_at = Date.now();
-  }
-
-  return next();
-});
+}, { timestamps: true });
 
 export const questionModel = new model("Question", QuestionSchema);

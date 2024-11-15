@@ -4,18 +4,19 @@ import { CustomResponse } from "../utility.js";
 
 class QuestionController {
   static async getAll(req, res) {
+    const page = Number(req.query.page) || undefined;
+    const limit = Number(req.query.limit) || undefined;
+    const skip = (page - 1) * limit || undefined;
+
     try {
       let msg = "Questions found";
 
-      const questions = await questionModel.find();
-      if (!questions.length) msg = "No question exists";
+      const questions = await questionModel.find().skip(skip).limit(limit);
+      if (!questions?.length) msg = "No question exists";
 
-      return res.status(200).json(new CustomResponse(msg, false, questions));
+      return res.status(200).json(new CustomResponse(msg, false, questions, page, limit));
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }
@@ -51,14 +52,11 @@ class QuestionController {
           new CustomResponse(
             "Question created successfully",
             false,
-            newQuestion
-          )
+            newQuestion,
+          ),
         );
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }
@@ -70,22 +68,15 @@ class QuestionController {
     try {
       let msg = "Question not found";
 
-      const question = await questionModel.findById(id);
-      if (!question) return res.status(404).json(new CustomResponse(msg, true));
-
-      Object.assign(question, body);
-      const updatedQuestion = await question.save();
+      const updatedQuestion = await questionModel.findByIdAndUpdate(id, body);
+      if (!updatedQuestion) return res.status(404).json(new CustomResponse(msg, true));
 
       msg = "Question updated successfully";
-
       return res
         .status(200)
         .json(new CustomResponse(msg, false, updatedQuestion));
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }
@@ -96,10 +87,9 @@ class QuestionController {
     try {
       let msg = "Question not found";
 
-      const question = await questionModel.findById(id);
+      const question = await questionModel.findByIdAndDelete(id);
       if (!question) return res.status(404).json(new CustomResponse(msg, true));
 
-      await questionModel.findByIdAndDelete(id);
       msg = "Question deleted successfully";
 
       const exams = await examModel.find({ questions: id });
@@ -111,10 +101,7 @@ class QuestionController {
 
       return res.status(200).json(new CustomResponse(msg, false));
     } catch (error) {
-      let errMsg = "Internal server error";
-
-      if (error instanceof Error) errMsg = error.message;
-
+      const errMsg = error.message || "Internal server error";
       return res.status(500).json(new CustomResponse(errMsg, true));
     }
   }

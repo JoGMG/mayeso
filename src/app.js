@@ -10,10 +10,7 @@ try {
   await mongoose.connect(process.env.DB_URL);
   console.log("Connected to DB successfully");
 } catch (error) {
-  let errMsg = "Failed to connect to DB";
-
-  if (error instanceof Error) errMsg = error.message;
-
+  const errMsg = error.message || "Failed to connect to DB";
   throw Error(errMsg);
 }
 

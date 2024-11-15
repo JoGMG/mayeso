@@ -1,4 +1,4 @@
-# Mayeso (Server-Side)
+# Mayeso (Backend Service)
 
 Mayeso is your ultimate learning companion, designed to enhance your learning experience and make studying enjoyable. With Mayeso, you can create, discover, and master quizzes on a wide range of topics, all tailored to your learning goals.
 
@@ -11,7 +11,7 @@ Mayeso is your ultimate learning companion, designed to enhance your learning ex
 
 ## Getting Started
 
-To get started with Mayeso (server-side), follow these steps:
+To get started with Mayeso (backend-service), follow these steps:
 
 1. Clone this repository to your local machine.
 2. Install dependencies using `npm install`.
@@ -20,7 +20,7 @@ To get started with Mayeso (server-side), follow these steps:
 
 ## Technologies Used
 
-Mayeso (server-side) is built using the following technologies:
+Mayeso (backend-service) is built using the following technologies:
 
 - Node.js
 - Express.js

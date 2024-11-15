@@ -25,7 +25,7 @@ app.use(cors());
 app.use("/", allRouter);
 
 app.get("/", (req, res) => {
-  return res.send("Hello World");
+  return res.send("Hello! Welcome to Mayeso Backend Server.");
 });
 
 app.listen(PORT, () => {

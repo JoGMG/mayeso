@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "",
-  "main": "app/server.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node src/app.js"
   },
   "keywords": [],
   "author": "Joshua Attah",

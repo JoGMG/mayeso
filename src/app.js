@@ -25,7 +25,7 @@ app.use(cors());
 app.use("/", allRouter);
 
 app.get("/", (req, res) => {
-  return res.status(200).json("Hello World");
+  return res.send("Hello World");
 });
 
 app.listen(PORT, () => {
